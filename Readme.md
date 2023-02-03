@@ -7,7 +7,7 @@
 [npm-image]: https://img.shields.io/npm/v/co-body.svg?style=for-the-badge
 [npm-url]: https://npmjs.org/package/co-body
 
-[gh-workflow-image]: https://img.shields.io/github/workflow/status/thetutlage/co-body/test?style=for-the-badge
+[gh-workflow-image]: https://img.shields.io/github/actions/workflow/status/thetutlage/co-body/test.yml?style=for-the-badge
 [gh-workflow-url]: https://github.com/thetutlage/co-body/actions/workflows/test.yml "Github action"
 
 [download-image]: https://img.shields.io/npm/dm/@poppinss/co-body.svg?style=for-the-badge
