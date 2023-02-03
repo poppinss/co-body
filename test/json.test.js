@@ -200,4 +200,51 @@ describe('parse.json(req, opts)', function() {
         .expect(200, done);
     });
   });
+
+  describe('empty string to null', function() {
+    it('convert empty string to null', function(done) {
+      const app = new koa();
+
+      app.use(async function(ctx) {
+        ctx.body = await parse.json(ctx, { convertEmptyStringsToNull: true, returnRawBody: true });
+      });
+
+      request(app.callback())
+        .post('/')
+        .type('json')
+        .send({ foo: '' })
+        .expect({ parsed: { foo: null }, raw: '{"foo":""}' })
+        .expect(200, done);
+    });
+
+    it('do not convert empty string to null when not enabled', function(done) {
+      const app = new koa();
+
+      app.use(async function(ctx) {
+        ctx.body = await parse.json(ctx, { convertEmptyStringsToNull: false, returnRawBody: true });
+      });
+
+      request(app.callback())
+        .post('/')
+        .type('json')
+        .send({ foo: '' })
+        .expect({ parsed: { foo: '' }, raw: '{"foo":""}' })
+        .expect(200, done);
+    });
+
+    it('do not convert empty key to null', function(done) {
+      const app = new koa();
+
+      app.use(async function(ctx) {
+        ctx.body = await parse.json(ctx, { convertEmptyStringsToNull: true, returnRawBody: true });
+      });
+
+      request(app.callback())
+        .post('/')
+        .type('json')
+        .send({ '': '' })
+        .expect({ parsed: { '': '' }, raw: '{"":""}' })
+        .expect(200, done);
+    });
+  });
 });
